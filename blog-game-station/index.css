@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+#gameStationModal.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#gameStationModal.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+#gameStationModal .modal-content-wrapper {
+    background-color: #1a1a1a;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 90%;
+    width: 600px;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.7);
+    position: relative;
+    color: #e5e5e5;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+}
+
+#gameStationModal.modal-overlay.active .modal-content-wrapper {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#gameStationModal .modal-content-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.3) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.3) 75%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    background-size: 200% 200%;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-position 0.3s ease;
+    z-index: -1;
+}
+
+#gameStationModal .modal-content-wrapper:hover::before {
+    opacity: 1;
+    background-position: -100% -100%;
+}
+
+#gameStationModal .modal-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    line-height: 1;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+#gameStationModal .modal-close-button:hover {
+    color: #ffffff;
+}
+
+#modalNewsTitle {
+    color: #a855f7;
+    font-size: 1.875rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+#modalNewsBody {
+    color: #d1d5db;
+    font-size: 1.125rem;
+    line-height: 1.6;
+}

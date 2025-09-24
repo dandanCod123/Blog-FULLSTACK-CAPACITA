@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 const NavBar_Itens = [
@@ -51,7 +52,7 @@ export default function Header(){
           shadow-2xl
           py-1 px-6
           bg-green-500 
-          text-center hover:bg-amber-400 transition-colors cursor-pointer font-bold">Entrar</button>
+          text-center hover:bg-amber-400 transition-colors cursor-pointer font-bold"><Link to="/dashboard">Entrar</Link></button>
 
     </div>
     

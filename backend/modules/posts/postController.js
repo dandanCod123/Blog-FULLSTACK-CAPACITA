@@ -36,8 +36,9 @@ exports.createPostController = async (req, res) => {
 exports.getAllPostsController = async (req, res) => {
   const correlationId = req.headers["x-correlation-id"] || `list-${Date.now()}`;
   try {
-    const posts = await postService.getAllPosts();
-    logger.info("Posts listados", { correlationId, count: posts.length });
+    const userId = req.user.id; // pega id do usuário logado
+    const posts = await postService.getAllPosts(userId);
+    logger.info("Posts listados", { correlationId, count: posts.length, userId });
 
     res.json({ posts, count: posts.length });
   } catch (error) {
@@ -45,6 +46,7 @@ exports.getAllPostsController = async (req, res) => {
     res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
+
 
 exports.getPostByIdController = async (req, res) => {
   const correlationId = req.headers["x-correlation-id"] || `get-${Date.now()}`;

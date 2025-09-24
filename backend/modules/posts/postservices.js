@@ -13,18 +13,21 @@ const normalizeKeys = (obj) => {
 // ============================
 // Recuperar todos os posts
 // ============================
-const getAllPosts = async () => {
+const getAllPosts = async (userId) => {
   try {
     const posts = await prisma.post.findMany({
+      where: { userId }, // filtra apenas posts do usuário logado
       include: { user: { select: { id: true, name: true, email: true } } },
+      orderBy: { createAt: 'desc' } // opcional: mais recente primeiro
     });
-    logger.info("Posts listados com sucesso.", { count: posts.length });
+    logger.info("Posts listados com sucesso.", { count: posts.length, userId });
     return posts;
   } catch (error) {
     logger.error("Erro ao acessar os posts.", { error: error.message });
     throw error;
   }
 };
+
 
 // ============================
 // Recuperar um post pelo id

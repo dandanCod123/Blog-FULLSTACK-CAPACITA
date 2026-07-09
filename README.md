@@ -1,192 +1,271 @@
 # 📝 Blog FULLSTACK CAPACITA
 
-Projeto fullstack de um **blog**, desenvolvido como parte de um processo de capacitação/estudo em desenvolvimento web. A aplicação é dividida em duas partes principais: uma **API REST** (backend) construída com Node.js, Express e Prisma, e uma camada de **frontend** (pasta `blog-game-station`) responsável pela interface do usuário.
+<p align="center">
+  <!-- Backend -->
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express-5-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/Prisma-ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white" />
+  <img src="https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" />
+  <img src="https://img.shields.io/badge/bcrypt-Security-8A2BE2?style=for-the-badge" />
+  <!-- Frontend -->
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+</p>
 
-> ⚠️ Este README foi montado com base na estrutura e nas dependências públicas do repositório. Alguns detalhes específicos (rotas da API, banco de dados exato, variáveis de ambiente) podem precisar de ajuste — marquei abaixo os pontos que você deve conferir/completar.
+<p align="center">
+  Aplicação fullstack de <strong>blog</strong> com autenticação de usuários, desenvolvida como projeto prático de capacitação em desenvolvimento web — API REST em Node.js/Express + Prisma no backend, consumida por uma interface web no frontend.
+</p>
 
 ---
 
-## 📌 Índice
+## 📋 Índice
 
-- [Sobre o projeto](#-sobre-o-projeto)
-- [Tecnologias utilizadas](#-tecnologias-utilizadas)
-- [Estrutura do projeto](#-estrutura-do-projeto)
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Arquitetura](#-arquitetura)
+- [Stack Tecnológica](#-stack-tecnológica)
 - [Pré-requisitos](#-pré-requisitos)
-- [Instalação e configuração](#-instalação-e-configuração)
-- [Variáveis de ambiente](#-variáveis-de-ambiente)
-- [Executando o projeto](#-executando-o-projeto)
-- [Scripts disponíveis](#-scripts-disponíveis)
-- [Prisma / Banco de dados](#-prisma--banco-de-dados)
+- [Instalação e Configuração](#-instalação-e-configuração)
+  - [Backend](#-backend)
+  - [Frontend](#-frontend)
+- [Variáveis de Ambiente](#-variáveis-de-ambiente)
+- [Scripts Disponíveis](#-scripts-disponíveis)
+- [Prisma / Banco de Dados](#-prisma--banco-de-dados)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Roadmap](#-roadmap)
-- [Contribuindo](#-contribuindo)
-- [Autor](#-autor)
+- [Contribuição](#-contribuição)
 - [Licença](#-licença)
 
 ---
 
-## 📖 Sobre o projeto
+## 🚀 Sobre o Projeto
 
-O **Blog FULLSTACK CAPACITA** é uma aplicação de blog completa, com autenticação de usuários e persistência de dados via ORM. O objetivo do projeto é colocar em prática conceitos de desenvolvimento fullstack, incluindo:
+O **Blog FULLSTACK CAPACITA** é uma aplicação de blog fullstack construída para colocar em prática conceitos essenciais de desenvolvimento web: criação de uma API REST segura, autenticação de usuários, persistência de dados via ORM e consumo dessa API por uma interface web.
 
-- Criação de uma API RESTful com **Express**
-- Autenticação e segurança com **JWT** e **bcrypt**
-- Modelagem e acesso a banco de dados com **Prisma ORM**
-- Consumo da API por uma interface web (HTML, CSS e JavaScript)
+O projeto é dividido em duas partes:
+
+- **`backend/`** — API REST em **Node.js + Express 5**, com autenticação via **JWT**, senhas protegidas com **bcrypt** e acesso ao banco de dados via **Prisma ORM**.
+- **`blog-game-station/`** — camada de frontend responsável pela interface do usuário, consumindo a API do backend.
 
 ---
 
-## 🚀 Tecnologias utilizadas
+## ✨ Funcionalidades
+
+> As funcionalidades abaixo refletem o que é possível inferir das dependências do projeto (auth JWT + bcrypt + Prisma). Ajuste esta lista para bater exatamente com o que está implementado.
+
+- 🔐 **Autenticação de usuários** — cadastro e login com senha criptografada (bcrypt) e sessão via JWT
+- ✍️ **Publicação de posts** — criação, edição e exclusão de conteúdos do blog
+- 📄 **Listagem e leitura de posts** — visualização dos artigos publicados
+- 🗄️ **Persistência de dados** — modelagem e acesso ao banco via Prisma ORM
+- 🌐 **API REST** — comunicação entre frontend e backend via endpoints HTTP
+- 📋 **Logging estruturado** — logs de requisições/erros com Pino
+
+---
+
+## 🏗️ Arquitetura
+
+```
+┌───────────────────────────────────────────┐
+│         Cliente (blog-game-station)        │
+│         HTML • CSS • JavaScript             │
+└─────────────────────┬───────────────────────┘
+                      │ HTTP / REST API
+┌─────────────────────▼───────────────────────┐
+│            Servidor (backend)                │
+│   Express 5 • JWT • bcrypt • Pino (logs)     │
+└─────────────────────┬───────────────────────┘
+                      │ Prisma ORM
+┌─────────────────────▼───────────────────────┐
+│              Banco de Dados                   │
+│     (PostgreSQL / MySQL / SQLite — conferir)  │
+└───────────────────────────────────────────────┘
+```
+
+---
+
+## 🛠️ Stack Tecnológica
 
 ### Backend
-- [Node.js](https://nodejs.org/)
-- [Express 5](https://expressjs.com/)
-- [Prisma ORM](https://www.prisma.io/) (`@prisma/client`, `prisma`)
-- [JSON Web Token (jsonwebtoken)](https://www.npmjs.com/package/jsonwebtoken) — autenticação
-- [bcrypt](https://www.npmjs.com/package/bcrypt) — hash de senhas
-- [cors](https://www.npmjs.com/package/cors) — controle de acesso entre origens
-- [dotenv](https://www.npmjs.com/package/dotenv) — variáveis de ambiente
-- [pino](https://getpino.io/) + [pino-pretty](https://www.npmjs.com/package/pino-pretty) — logging
-- [nodemon](https://www.npmjs.com/package/nodemon) — reinício automático em desenvolvimento
+
+| Tecnologia | Uso |
+|---|---|
+| Node.js | Runtime JavaScript |
+| Express 5 | Framework web / criação da API REST |
+| Prisma ORM | Acesso e modelagem do banco de dados |
+| jsonwebtoken (JWT) | Autenticação e autorização |
+| bcrypt | Hash e verificação de senhas |
+| cors | Controle de acesso entre origens (CORS) |
+| dotenv | Carregamento de variáveis de ambiente |
+| pino / pino-pretty | Logging estruturado |
+| nodemon | Reinício automático em desenvolvimento |
 
 ### Frontend
-- JavaScript (Vanilla)
-- HTML5
-- CSS3
 
-> Pasta: `blog-game-station`
-
----
-
-## 📁 Estrutura do projeto
-
-```
-Blog-FULLSTACK-CAPACITA/
-├── backend/               # API REST (Express + Prisma)
-│   └── server.js          # Ponto de entrada do servidor
-├── blog-game-station/     # Frontend da aplicação
-├── package.json           # Dependências e scripts do projeto
-└── package-lock.json
-```
-
-> 💡 Se dentro de `backend/` e `blog-game-station/` você tiver subpastas como `routes/`, `controllers/`, `prisma/schema.prisma`, `public/`, etc., vale detalhar aqui para deixar a navegação mais clara pra quem for ler o repo.
+| Tecnologia | Uso |
+|---|---|
+| JavaScript (Vanilla) | Lógica da interface e consumo da API |
+| HTML5 | Estrutura das páginas |
+| CSS3 | Estilização |
 
 ---
 
 ## ✅ Pré-requisitos
 
-Antes de começar, você vai precisar ter instalado:
-
 - [Node.js](https://nodejs.org/) (recomendado LTS mais recente)
-- [npm](https://www.npmjs.com/) (instalado junto com o Node.js)
-- Um banco de dados compatível com Prisma (ex: **PostgreSQL**, **MySQL** ou **SQLite**, conforme configurado em `prisma/schema.prisma`)
+- [npm](https://www.npmjs.com/)
+- Um banco de dados compatível com Prisma (PostgreSQL, MySQL ou SQLite — conforme configurado em `prisma/schema.prisma`)
 
 ---
 
-## ⚙️ Instalação e configuração
+## ⚙️ Instalação e Configuração
+
+### 1. Clone o repositório
 
 ```bash
-# Clone o repositório
 git clone https://github.com/dandanCod123/Blog-FULLSTACK-CAPACITA.git
-
-# Acesse a pasta do projeto
 cd Blog-FULLSTACK-CAPACITA
+```
 
-# Instale as dependências
+### 2. Instale as dependências
+
+```bash
 npm install
 ```
 
 ---
 
-## 🔐 Variáveis de ambiente
+### 🔧 Backend
 
-Crie um arquivo `.env` na raiz do projeto (ou dentro de `backend/`, dependendo de onde o Prisma/Express espera carregá-lo) com as variáveis abaixo:
+#### 3. Configure as variáveis de ambiente
 
-```env
-# Banco de dados (ajuste conforme o provider usado no schema.prisma)
-DATABASE_URL="postgresql://usuario:senha@localhost:5432/blog_capacita"
+Crie um arquivo `.env` (veja a [seção de variáveis](#-variáveis-de-ambiente)).
 
-# Autenticação
-JWT_SECRET="sua_chave_secreta_aqui"
+#### 4. Rode as migrations do Prisma
 
-# Servidor
-PORT=3000
+```bash
+npx prisma migrate dev
 ```
 
-> ⚠️ Confirme os nomes exatos das variáveis usadas no código (`process.env.XXX`) e ajuste este bloco de acordo.
-
----
-
-## ▶️ Executando o projeto
-
-### Backend (modo desenvolvimento)
+#### 5. Inicie o servidor
 
 ```bash
 npm run backend
 ```
 
-Esse comando executa `nodemon backend/server.js`, reiniciando o servidor automaticamente a cada alteração no código.
-
-### Frontend
-
-Abra os arquivos dentro de `blog-game-station` (por exemplo, `index.html`) diretamente no navegador, ou sirva a pasta com uma extensão como **Live Server** (VSCode).
+O comando executa `nodemon backend/server.js`, reiniciando o servidor automaticamente a cada alteração no código. Por padrão, a API deve ficar disponível em `http://localhost:3000` (confira a porta configurada no seu `.env`).
 
 ---
 
-## 📜 Scripts disponíveis
+### 🎨 Frontend
 
-| Comando            | Descrição                                         |
-|---------------------|----------------------------------------------------|
-| `npm run backend`   | Inicia o servidor backend com nodemon              |
-| `npm test`          | Placeholder (ainda não há testes configurados)      |
-
----
-
-## 🗄️ Prisma / Banco de dados
-
-Este projeto usa o **Prisma** como ORM. Comandos úteis durante o desenvolvimento:
+#### 6. Acesse a pasta do frontend
 
 ```bash
-# Gerar o Prisma Client
-npx prisma generate
-
-# Rodar migrações
-npx prisma migrate dev
-
-# Abrir o Prisma Studio (interface visual do banco)
-npx prisma studio
+cd blog-game-station
 ```
 
-> 💡 Certifique-se de que o arquivo `prisma/schema.prisma` está configurado com o `provider` e a `DATABASE_URL` corretos antes de rodar as migrações.
+#### 7. Abra a aplicação
+
+Abra o `index.html` diretamente no navegador ou sirva a pasta com uma extensão como **Live Server** (VSCode), apontando as chamadas de API para a URL do backend.
+
+---
+
+## 🔐 Variáveis de Ambiente
+
+```env
+# Banco de dados (ajuste conforme o provider usado no schema.prisma)
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/blog_capacita"
+
+# JWT
+JWT_SECRET="sua_chave_secreta_aqui"
+JWT_EXPIRES_IN="7d"
+
+# Servidor
+PORT=3000
+```
+
+> ⚠️ **Nunca** commite o arquivo `.env` no repositório. Confirme os nomes exatos das variáveis usadas no código (`process.env.XXX`) e ajuste conforme necessário.
+
+---
+
+## 📜 Scripts Disponíveis
+
+```bash
+npm run backend    # Inicia o servidor backend com nodemon (watch mode)
+npm test           # Placeholder — ainda não há testes configurados
+```
+
+---
+
+## 🗄️ Prisma / Banco de Dados
+
+```bash
+npx prisma generate     # Gera o Prisma Client
+npx prisma migrate dev  # Cria e executa uma nova migration
+npx prisma studio       # Abre o Prisma Studio (GUI do banco)
+```
+
+> 💡 Certifique-se de que `prisma/schema.prisma` está com o `provider` e a `DATABASE_URL` corretos antes de rodar as migrations.
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+Blog-FULLSTACK-CAPACITA/
+│
+├── backend/                    # API REST (Express + Prisma)
+│   ├── prisma/
+│   │   ├── schema.prisma       # Schema do banco de dados
+│   │   └── migrations/         # Histórico de migrations
+│   ├── src/
+│   │   ├── routes/             # Rotas da API
+│   │   ├── controllers/        # Lógica das requisições
+│   │   ├── middlewares/        # Autenticação, validações, etc.
+│   │   └── services/           # Regras de negócio
+│   └── server.js               # Ponto de entrada do servidor
+│
+├── blog-game-station/          # Frontend da aplicação
+│   ├── index.html
+│   ├── css/
+│   └── js/
+│
+├── package.json                # Dependências e scripts do projeto
+└── package-lock.json
+```
+
+> 💡 Esta estrutura é um modelo baseado em convenções comuns de projetos Express + Prisma. Ajuste para refletir exatamente as subpastas de `backend/` e `blog-game-station/` no seu repositório.
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Documentar as rotas da API (endpoints, métodos, payloads)
-- [ ] Adicionar testes automatizados
-- [ ] Adicionar exemplos de uso (prints ou GIFs da aplicação)
-- [ ] Deploy (Vercel / Render / Railway, etc.)
+- [ ] Documentar os endpoints da API (rotas, métodos, payloads de request/response)
+- [ ] Adicionar testes automatizados (unitários e/ou e2e)
+- [ ] Adicionar prints ou GIFs demonstrando a aplicação em uso
+- [ ] Configurar deploy (Vercel / Render / Railway)
 
 ---
 
-## 🤝 Contribuindo
+## 🤝 Contribuição
 
 Contribuições são bem-vindas! Para contribuir:
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/minha-feature`)
-3. Commit suas alterações (`git commit -m 'Adiciona minha feature'`)
-4. Faça push para a branch (`git push origin feature/minha-feature`)
+1. Fork o projeto
+2. Crie uma branch para sua feature: `git checkout -b feat/minha-feature`
+3. Commit suas alterações: `git commit -m 'feat: adiciona minha feature'`
+4. Push para a branch: `git push origin feat/minha-feature`
 5. Abra um Pull Request
 
----
-
-## 👤 Autor
-
-Desenvolvido por [**dandanCod123**](https://github.com/dandanCod123)
+Recomenda-se seguir o padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/).
 
 ---
 
 ## 📄 Licença
 
 Este projeto está sob a licença **ISC** (conforme definido no `package.json`). Sinta-se à vontade para adaptar conforme necessário.
+
+---
+
+<p align="center">Feito com ❤️ por <a href="https://github.com/dandanCod123">dandanCod123</a></p>
